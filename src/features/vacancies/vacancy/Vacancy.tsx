@@ -1,16 +1,15 @@
 import React from 'react';
 import style from './Style.module.css'
-import {Text, Title} from "@mantine/core";
+import {Rating, Text, Title} from "@mantine/core";
 import point from '../../../assets/img/point.svg'
 import location from '../../../assets/img/location.svg'
-import star2 from '../../../assets/img/star2.svg'
 
 export const Vacancy = () => {
     return (
         <div className={style.vacancy}>
             <div className={style.title}>
                 <Title order={4} color={'#5E96FC'}>Менеджер-дизайнер</Title>
-                <img src={star2} alt='star2'/>
+                <Rating count={1}/>
             </div>
 
             <div className={style.salary}>

@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './Style.module.css'
-import {Button, Input} from "@mantine/core";
+import {Button, Input, Pagination} from "@mantine/core";
 import {Vacancy} from "./vacancy/Vacancy";
 
 export const Vacancies = () => {
@@ -12,11 +12,12 @@ export const Vacancies = () => {
                     Поиск
                 </Button>
             </Input.Wrapper>
+            <Vacancy/>
+            <Vacancy/>
+            <Vacancy/>
+            <Vacancy/>
 
-            <Vacancy/>
-            <Vacancy/>
-            <Vacancy/>
-            <Vacancy/>
+            <Pagination total={3} className={style.pagination}/>
         </div>
     );
 };

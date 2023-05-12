@@ -21,3 +21,7 @@
     margin: 20px;
     width: 85%;
 }
+
+.resetButton {
+    padding: 0;
+}
