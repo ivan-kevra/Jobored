@@ -1,28 +1,30 @@
 import React from 'react';
-import style from './Filter.module.css'
-import {Button, Select} from '@mantine/core';
+import style from './Style.module.css'
+import {Button, Select, Title} from '@mantine/core';
 import {IconChevronDown} from '@tabler/icons-react';
 
 export const Filter = () => {
     return (
         <div className={style.filter}>
             <div className={style.header}>
-                <div>Фильтры</div>
-                <div>Сбросить все</div>
+                <Title order={1}>Фильтры</Title>
+                <Button variant="subtle" color="gray" radius="xs">
+                    Сбросить все x
+                </Button>
             </div>
-            <div>
+            <div className={style.job}>
+                <Title order={3}>Отрасль</Title>
                 <Select
-                    label="Отрасль"
                     placeholder="Выберите отрасль"
                     rightSection={<IconChevronDown size="1rem"/>}
                     rightSectionWidth={30}
-                    styles={{rightSection: {pointerEvents: 'none'}}}
+                    // styles={{rightSection: {pointerEvents: 'none'}}}
                     data={['React', 'Angular', 'Svelte', 'Vue']}
                 />
             </div>
-            <div>
+            <div className={style.salary}>
+                <Title order={3}>Оклад</Title>
                 <Select
-                    label="Оклад"
                     placeholder="От"
                     data={[
                         {value: '100', label: '100'},
@@ -40,11 +42,11 @@ export const Filter = () => {
                         {value: '400', label: '400'},
                     ]}
                 />
-                <Button radius="lg" size="md">
-                    Применить
-                </Button>
-            </div>
 
+            </div>
+            <Button radius="lg" size="md" className={style.button}>
+                Применить
+            </Button>
 
         </div>
     );

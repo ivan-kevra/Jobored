@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './App.module.css'
+import style from './Style.module.css'
 import {Header} from '../features/header/Header';
 import {Vacancies} from '../features/vacancies/Vacancies';
 import {Filter} from "../features/filter/Filter";

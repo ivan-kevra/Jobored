@@ -1,0 +1,23 @@
+.filter {
+    background: #FFFFFF;
+
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.job {
+    padding: 20px;
+}
+
+.salary {
+    margin: 20px;
+}
+
+.button {
+    margin: 20px;
+    width: 85%;
+}
