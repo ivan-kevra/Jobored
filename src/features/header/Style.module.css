@@ -1,16 +1,18 @@
 .header {
-    background-color: #88fb61;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+    /*background: #FFFFFF;*/
 }
 
 .logo {
     display: flex;
+    /*background-color: #eaa0a0;*/
+    justify-content: center;
     gap: 10px;
+    padding: 24px;
 }
 
 .menu {
+    background: #FFFFFF;
+    /*background-color: #8282e7*/
     display: flex;
     gap: 20px
 }
