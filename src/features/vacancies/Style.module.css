@@ -1,3 +1,20 @@
 .vacancies {
-    background-color: #e1f8eb;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+}
+
+.search {
+    display: flex;
+
+    align-items: center;
+    border: 1px solid #EAEBED;
+    border-radius: 8px;
+}
+
+.input {
+    width: 80%;
+}
+
+.button {
+    width: 20%;
 }
