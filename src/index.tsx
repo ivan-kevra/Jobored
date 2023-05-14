@@ -4,18 +4,21 @@ import './index.css';
 import App from './app/App';
 import reportWebVitals from './reportWebVitals';
 import {MantineProvider} from "@mantine/core";
+import {BrowserRouter} from "react-router-dom";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 root.render(
     <React.StrictMode>
-        <MantineProvider theme={{
-            fontFamily: 'Inter',
-            fontSizes: {md: '16px'},
-        }} withGlobalStyles withNormalizeCSS>
-            <App/>
-        </MantineProvider>
+        <BrowserRouter>
+            <MantineProvider theme={{
+                fontFamily: 'Inter',
+                fontSizes: {md: '16px'},
+            }} withGlobalStyles withNormalizeCSS>
+                <App/>
+            </MantineProvider>
+        </BrowserRouter>
     </React.StrictMode>
 );
 

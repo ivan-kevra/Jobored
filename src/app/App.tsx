@@ -1,18 +1,16 @@
 import React from 'react';
 import style from './Style.module.css'
-import {Header} from '../features/header/Header';
-import {Vacancies} from '../features/vacancies/Vacancies';
-import {Filter} from "../features/filter/Filter";
-import {Grid} from '@mantine/core';
+import {Main} from "../components/main/Main";
+import {Route, Routes} from "react-router-dom";
+import {FullVacancy} from "../components/fullVacancy/FullVacancy";
 
 function App() {
     return (
         <div className={style.app}>
-            <Grid justify="center">
-                <Grid.Col span={12}><Header/></Grid.Col>
-                <Grid.Col span={3}><Filter/></Grid.Col>
-                <Grid.Col span={6}><Vacancies/></Grid.Col>
-            </Grid>
+            <Routes>
+                <Route path='/main' element={<Main/>}/>
+                <Route path='/fullVacancy' element={<FullVacancy/>}/>
+            </Routes>
         </div>
     );
 }
