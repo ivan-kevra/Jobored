@@ -16,7 +16,6 @@ export const Vacancies = () => {
             <Vacancy/>
             <Vacancy/>
             <Vacancy/>
-
             <Pagination total={3} className={style.pagination}/>
         </div>
     );
