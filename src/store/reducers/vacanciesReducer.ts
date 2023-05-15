@@ -1,7 +1,7 @@
-import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {CatalogResponseType, VacancyRequestType, VacancyResponseType} from "../../api/apiTypes";
+import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {api} from "../../api/api";
 import {setStatusAction} from "./appReducer";
-import {api} from "../../api/jobored-api";
 import {getPagesCount} from "../../utils/utils";
 
 export const showVacanciesCountOnPage = 4;
@@ -20,6 +20,7 @@ const initialState: VacanciesStateType = {
     pagesCount: 1,
     card: {} as VacancyResponseType
 }
+
 export const getVacancyByIdThunk = createAsyncThunk('get-vacancy-by-id-thunk', async (arg: {
     id: string
 }, thunkAPI) => {
@@ -79,6 +80,7 @@ export const clearVacancies = createAsyncThunk('clear-vacancies-thunk', async (a
 export const clearVacancyCard = createAsyncThunk('clear-card-thunk', async (arg, thunkAPI) => {
     thunkAPI.dispatch(setCard({card: {} as VacancyResponseType}));
 });
+
 const vacanciesSlice = createSlice({
     name: 'vacancies',
     initialState,
@@ -99,7 +101,7 @@ const vacanciesSlice = createSlice({
             state.card = action.payload.card;
         }
     }
-})
+});
 
 export const {
     setVacanciesAction,
@@ -117,6 +119,7 @@ type VacanciesStateType = {
     pagesCount: number
     card: VacancyResponseType
 }
+
 
 type SetCataloguesActionType = PayloadAction<{ catalogues: CatalogResponseType[] }>;
 type SetVacanciesParamsActionType = PayloadAction<{ params: VacancyRequestType }>;

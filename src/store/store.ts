@@ -1,15 +1,16 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import {useDispatch} from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
-import appReducer from './reducers/appReducer';
-import vacanciesReducer from './reducers/vacanciesReducer';
-import favoritesReducer from './reducers/favoritesReducer';
+import appReducer from "./reducers/appReducer";
+import vacanciesReducer from "./reducers/vacanciesReducer";
+import favoritesReducer from "./reducers/favoritesReducer";
+
 
 const rootReducer = combineReducers({
     app: appReducer,
     vacancies: vacanciesReducer,
     favorites: favoritesReducer
-});
+})
 
 const loadedState = () => {
     const state = localStorage.getItem('app');
@@ -25,8 +26,6 @@ export const store = configureStore({
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().prepend(thunkMiddleware),
     preloadedState: loadedState()
 });
-
-
 store.subscribe(() => {
     const state = JSON.stringify(store.getState());
     localStorage.setItem('app', state);

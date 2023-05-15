@@ -14,14 +14,14 @@ const root = ReactDOM.createRoot(
 root.render(
     <React.StrictMode>
         <BrowserRouter>
-            <Provider store={store}>
-                <MantineProvider theme={{
-                    fontFamily: 'Inter',
-                    fontSizes: {md: '16px'},
-                }} withGlobalStyles withNormalizeCSS>
+            <MantineProvider theme={{
+                fontFamily: 'Inter',
+                fontSizes: {md: '16px'},
+            }} withGlobalStyles withNormalizeCSS>
+                <Provider store={store}>
                     <App/>
-                </MantineProvider>
-            </Provider>
+                </Provider>
+            </MantineProvider>
         </BrowserRouter>
     </React.StrictMode>
 );

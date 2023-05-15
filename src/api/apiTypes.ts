@@ -1,13 +1,9 @@
-export type VacancyRequestType = {
-    published: number
-    keyword: string
-    payment_from: number
-    payment_to: number
-    catalogues: number
-    page: number
-    count: number
+export interface VacanciesDataResponseType {
+    objects: VacancyResponseType[]
+    total: number
 }
-export type VacancyResponseType = {
+
+export interface VacancyResponseType {
     id: number,
     payment_from: number
     payment_to: number
@@ -25,6 +21,17 @@ export type VacancyResponseType = {
     firm_name: string
     vacancyRichText: string
 }
+
+export interface VacancyRequestType {
+    published: number
+    keyword: string
+    payment_from: number
+    payment_to: number
+    catalogues: number
+    page: number
+    count: number
+}
+
 export interface CatalogResponseType {
     title:string
     key:number
