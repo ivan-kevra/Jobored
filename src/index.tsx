@@ -5,6 +5,8 @@ import App from './app/App';
 import reportWebVitals from './reportWebVitals';
 import {MantineProvider} from "@mantine/core";
 import {BrowserRouter} from "react-router-dom";
+import {store} from "./store/store";
+import {Provider} from "react-redux";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -12,12 +14,14 @@ const root = ReactDOM.createRoot(
 root.render(
     <React.StrictMode>
         <BrowserRouter>
-            <MantineProvider theme={{
-                fontFamily: 'Inter',
-                fontSizes: {md: '16px'},
-            }} withGlobalStyles withNormalizeCSS>
-                <App/>
-            </MantineProvider>
+            <Provider store={store}>
+                <MantineProvider theme={{
+                    fontFamily: 'Inter',
+                    fontSizes: {md: '16px'},
+                }} withGlobalStyles withNormalizeCSS>
+                    <App/>
+                </MantineProvider>
+            </Provider>
         </BrowserRouter>
     </React.StrictMode>
 );
