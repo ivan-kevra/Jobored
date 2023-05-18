@@ -1,6 +1,6 @@
 import React from 'react';
-import {Header} from "../../features/header/Header";
-import {Vacancy} from "../../features/vacancies/vacancy/Vacancy";
+import {Header} from "../../components/header/Header";
+import {Vacancy} from "../../components/vacancies/vacancy/Vacancy";
 import style from './Style.module.css'
 import {List, Title} from "@mantine/core";
 
@@ -9,7 +9,7 @@ export const FullVacancy = () => {
         <div>
             <Header/>
             <div className={style.vacancy}>
-                <Vacancy/>
+                {/*<Vacancy address={'address'}/>*/}
             </div>
             <div className={style.vacancy}>
                 <Title order={4} color={'#000000'}>Обязанности:</Title>

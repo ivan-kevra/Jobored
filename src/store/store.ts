@@ -1,18 +1,14 @@
-import {
-    AnyAction,
-    applyMiddleware,
-    combineReducers,
-    legacy_createStore,
-    ThunkAction,
-    ThunkDispatch
-} from "@reduxjs/toolkit";
-import thunkMiddleWare from "redux-thunk";
-import {ActionsType, appReducer} from "./reducers/appReducer";
+import thunkMiddleWare, {ThunkDispatch} from "redux-thunk";
+import {appReducer} from "./reducers/appReducer";
 import {useDispatch} from "react-redux";
+import {AnyAction, applyMiddleware, combineReducers, legacy_createStore} from "redux";
+import {vacanciesReducer} from "./reducers/vacanciesReducer";
+import {filterReducer} from "./reducers/filterReducer";
 
 const rootReducer = combineReducers({
     app: appReducer,
-
+    vacancies: vacanciesReducer,
+    filter: filterReducer
 });
 
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunkMiddleWare))
@@ -20,7 +16,7 @@ export const store = legacy_createStore(rootReducer, applyMiddleware(thunkMiddle
 export type AppDispatchType = ThunkDispatch<AppRootStateType, any, AnyAction>
 export const useAppDispatch = () => useDispatch<AppDispatchType>()
 export type AppRootStateType = ReturnType<typeof rootReducer>
-export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppRootStateType, unknown, ActionsType>
+
 
 // @ts-ignore
 window.store = store

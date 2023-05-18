@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
 import style from './Style.module.css'
-import {Main} from "../components/main/Main";
-import {Route, Routes, Navigate} from "react-router-dom";
-import {FullVacancy} from "../components/fullVacancy/FullVacancy";
-import {Favorites} from "../components/favorites/Favorites";
-import {Empty} from "../components/empty/Empty";
+import {Main} from "../pages/main/Main";
+import {Navigate, Route, Routes} from "react-router-dom";
+import {FullVacancy} from "../pages/fullVacancy/FullVacancy";
+import {Favorites} from "../pages/favorites/Favorites";
+import {Empty} from "../pages/empty/Empty";
 import {useAppDispatch} from "../store/store";
 import {isAuthTC} from "../store/reducers/appReducer";
 
@@ -14,10 +14,12 @@ function App() {
 
     useEffect(() => {
         dispatch(isAuthTC())
-    });
+    }, [])
 
     return (
         <div className={style.app}>
+
+
             <Routes>
                 <Route element={<Main/>} path='/main'/>
                 <Route element={<FullVacancy/>} path='/fullVacancy'/>

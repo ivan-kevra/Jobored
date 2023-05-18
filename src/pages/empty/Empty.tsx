@@ -1,9 +1,9 @@
 import React from 'react';
-import {Header} from "../../features/header/Header";
 import empty from '../../assets/img/empty.svg'
 import {Title} from "@mantine/core";
 import {Button} from '@mantine/core';
 import style from './Style.module.css'
+import {Header} from '../../components/header/Header';
 
 export const Empty = () => {
     return (

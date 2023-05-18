@@ -1,4 +1,5 @@
-import axios, {AxiosResponse} from "axios";
+import axios from "axios";
+import {VacanciesDataResponseType} from "../store/reducers/vacanciesReducer";
 
 
 const API_URL = 'https://startup-summer-2023-proxy.onrender.com/2.0/';
@@ -20,10 +21,14 @@ const instance = axios.create({
 
 export const api = {
     auth() {
-        return instance.get(`oauth2/password/?login=${AUTH_LOGIN}&password=${AUTH_PWD}&client_id${CLIENT_ID}=&client_secret=${ACCESS_TOKEN}&hr=${CLIENT_HR}`)
+        return instance.get(`oauth2/password/?login=${AUTH_LOGIN}&password=${AUTH_PWD}&client_id=${CLIENT_ID}&client_secret=${ACCESS_TOKEN}&hr=${CLIENT_HR}`)
     },
-    getVacancies(data: any) {
-        const {published, keyword, payment_from, payment_to, catalogues, page, count} = data;
-        return instance.get<AxiosResponse, AxiosResponse<any>>(`vacancies/?published=${published}&keyword=${keyword}&payment_from=${payment_from}&payment_to=${payment_to}&catalogues=${catalogues}&page=${page}&count=${count}/`)
+    getVacancies() {
+        return instance.get<VacanciesDataResponseType>(`vacancies`)
+    },
+    getCatalogues() {
+        return instance.get('catalogues/');
     },
 }
+
+
