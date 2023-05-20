@@ -4,12 +4,12 @@ import {Pagination} from "@mantine/core";
 import {Vacancy} from "./vacancy/Vacancy";
 import {VacancyResponseType} from "../../store/reducers/vacanciesReducer";
 import {SearchInput} from "../searchInput/SearchInput";
-import {useSelector} from "react-redux";
-import {AppRootStateType} from "../../store/store";
 
+type VacanciesPropsType = {
+    vacancies: VacancyResponseType[]
+}
+export const Vacancies: React.FC<VacanciesPropsType> = ({vacancies}) => {
 
-export const Vacancies = () => {
-    const vacancies = useSelector<AppRootStateType, VacancyResponseType[]>(state => state.vacancies.objects)
     return (
         <div className={style.vacancies}>
             <SearchInput/>

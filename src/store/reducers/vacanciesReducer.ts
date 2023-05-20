@@ -1,24 +1,43 @@
 import {Dispatch} from "redux";
 import {api} from "../../api/api";
+import {FilterParamsType} from "./filterReducer";
 
 
-const initialState: VacanciesDataResponseType = {objects: []}
+const initialState: VacanciesDataResponseType = {
+    objects: [],
+    filterParams: {
+        catalogue: null,
+        payment_from: 0,
+        payment_to: 0,
+    },
+}
 
 export const vacanciesReducer = (state: VacanciesDataResponseType = initialState, action: VacanciesActionsType): VacanciesDataResponseType => {
     switch (action.type) {
         case 'GET-VACANCIES': {
             return {...state, objects: [...action.vacancies]}
         }
+        case "SET-FILTER-PARAMS" :
+            return {
+                ...state,
+                filterParams: {
+                    ...state.filterParams,
+                    catalogue: action.params.catalogue,
+                    payment_from: action.params.payment_from,
+                    payment_to: action.params.payment_to
+                }
+            }
         default:
             return state
     }
 }
 //actions
-const getVacanciesAC = (vacancies: VacancyResponseType[]) => ({type: 'GET-VACANCIES', vacancies} as const);
-
+export const getVacanciesAC = (vacancies: VacancyResponseType[]) => ({type: 'GET-VACANCIES', vacancies} as const);
+export const setFilterParamsAC = (params: FilterParamsType) => ({type: 'SET-FILTER-PARAMS', params} as const);
 //thunks
-export const setVacanciesTC = () => (dispatch: Dispatch<VacanciesActionsType>) => {
-    api.getVacancies()
+
+export const setVacanciesTC = (params: FilterParamsType) => (dispatch: Dispatch<VacanciesActionsType>) => {
+    api.getVacancies(params)
         .then(response => {
             dispatch(getVacanciesAC(response.data.objects))
         })
@@ -29,7 +48,8 @@ export const setVacanciesTC = () => (dispatch: Dispatch<VacanciesActionsType>) =
 
 //types
 export type VacanciesDataResponseType = {
-    objects: VacancyResponseType[]
+    objects: VacancyResponseType[],
+    filterParams: FilterParamsType,
 }
 export type VacancyResponseType = {
     id: number
@@ -46,3 +66,4 @@ export type VacancyResponseType = {
     currency: string
 }
 export type VacanciesActionsType = ReturnType<typeof getVacanciesAC>
+    | ReturnType<typeof setFilterParamsAC>

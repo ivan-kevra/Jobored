@@ -1,34 +1,43 @@
 import React, {ChangeEvent} from 'react';
 import style from './Style.module.css'
-import {Button, CloseButton, Group, Input, NumberInput, Select, Title} from '@mantine/core';
+import {Button, CloseButton, Group, Input, NumberInput, Title} from '@mantine/core';
 import {IconChevronDown} from '@tabler/icons-react';
 import {
     CatalogueResponseType,
-    resetFilterAC, setCatalogueAC,
+    FilterParamsType,
+    setCatalogueAC,
     setPaymentFromAC,
     setPaymentToAC
 } from "../../store/reducers/filterReducer";
-import {useSelector} from "react-redux";
-import {AppRootStateType, useAppDispatch} from "../../store/store";
+import {useAppDispatch} from "../../store/store";
 
-
-export const Filter = () => {
+type FilterPropsType = {
+    catalogues: CatalogueResponseType[]
+    catalogue: number | null
+    paymentFrom: number
+    paymentTo: number
+    filterParams: FilterParamsType
+    resetFilter: () => void
+    getVacancies: (param: FilterParamsType) => void
+    applyFilters: (data: { catalogue: number | null, paymentFrom: number, paymentTo: number }) => void
+    setCatalogue: (title: number) => void
+}
+export const Filter: React.FC<FilterPropsType> = ({
+                                                      catalogues,
+                                                      catalogue,
+                                                      paymentFrom,
+                                                      paymentTo,
+                                                      resetFilter,
+                                                      applyFilters,
+                                                      setCatalogue
+                                                  }) => {
 
     const dispatch = useAppDispatch()
-    const catalogues = useSelector<AppRootStateType, CatalogueResponseType[]>(state => state.filter.catalogues)
-    const catalogue = useSelector<AppRootStateType, number | null>(state => state.filter.filterParams.catalogue)
-    const paymentFrom = useSelector<AppRootStateType, number>(state => state.filter.filterParams.payment_from)
-    const paymentTo = useSelector<AppRootStateType, number>(state => state.filter.filterParams.payment_to)
-
-
-    const setCatalogueHandler = (title: number) => {
-        dispatch(setCatalogueAC(title))
-    }
 
     const setSalaryFrom = (value: number) => dispatch(setPaymentFromAC(value))
     const setSalaryTo = (value: number) => dispatch(setPaymentToAC(value))
-    const resetFilter = () => {
-        dispatch(resetFilterAC())
+    const setFilter = () => {
+        applyFilters({catalogue, paymentTo, paymentFrom})
     }
 
     return (
@@ -39,27 +48,19 @@ export const Filter = () => {
                     <Button variant="subtle" color="gray" className={style.resetButton} onClick={resetFilter}>
                         Сбросить все
                     </Button>
-                    <CloseButton aria-label="Close modal"/>
+                    <CloseButton aria-label="Close modal" onClick={resetFilter}/>
                 </Group>
             </div>
-
             <div className={style.job}>
                 <Title order={3}>Отрасль</Title>
                 <Input component="select"
                        value={catalogue ? catalogue : ' '}
-                       onChange={(event: ChangeEvent<HTMLSelectElement>) => setCatalogueHandler(+event.currentTarget.value)}
+                       onChange={(event: ChangeEvent<HTMLSelectElement>) => setCatalogue(+event.currentTarget.value)}
                        rightSection={<IconChevronDown size={14} stroke={1.5}
                        />}>
-                    {catalogues.map((cat) => {
-                            return (
-                                <option value={cat.key}>{cat.title}</option>)
-                        }
-                    )
-                    }
-
+                    {catalogues.map(catalog => <option key={catalog.key} value={catalog.key}>{catalog.title}</option>)}
                 </Input>
             </div>
-
             <div className={style.salary}>
                 <Title order={3}>Оклад</Title>
                 <NumberInput
@@ -79,7 +80,8 @@ export const Filter = () => {
 
 
             </div>
-            <Button radius="lg" size="md" className={style.button}>
+            <Button radius="lg" size="md" className={style.button}
+                    onClick={setFilter}>
                 Применить
             </Button>
 

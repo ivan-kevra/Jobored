@@ -1,11 +1,13 @@
 import {Dispatch} from "redux";
 import {api} from "../../api/api";
+import {getVacanciesAC, setVacanciesTC, VacanciesDataResponseType, VacancyResponseType} from "./vacanciesReducer";
 
-type initialStateType = {
+
+export type FilterStateType = {
     filterParams: FilterParamsType,
     catalogues: CatalogueResponseType[]
 }
-const initialState: initialStateType = {
+const initialState: FilterStateType = {
     filterParams: {
         catalogue: null,
         payment_from: 0,
@@ -14,7 +16,7 @@ const initialState: initialStateType = {
     catalogues: []
 }
 
-export const filterReducer = (state: initialStateType = initialState, action: ActionsType): initialStateType => {
+export const filterReducer = (state: FilterStateType = initialState, action: ActionsType): FilterStateType => {
     switch (action.type) {
         case 'GET-CATALOGUES':
             return {...state, catalogues: action.catalogues}
@@ -28,6 +30,16 @@ export const filterReducer = (state: initialStateType = initialState, action: Ac
 
         case "RESET-FILTER" :
             return {...state, filterParams: {...state.filterParams, catalogue: null, payment_from: 0, payment_to: 0}}
+        case "SET-FILTER-PARAMS" :
+            return {
+                ...state,
+                filterParams: {
+                    ...state.filterParams,
+                    catalogue: action.params.catalogue,
+                    payment_from: action.params.payment_from,
+                    payment_to: action.params.payment_to
+                }
+            }
         default:
             return state
     }
@@ -41,6 +53,7 @@ export const setCatalogueAC = (catalogue: number | null) => ({type: 'SET-CATALOG
 export const setPaymentFromAC = (payment_from: number) => ({type: 'SET-PAYMENT-FROM', payment_from} as const);
 export const setPaymentToAC = (payment_to: number) => ({type: 'SET-PAYMENT-TO', payment_to} as const);
 export const resetFilterAC = () => ({type: 'RESET-FILTER'} as const)
+export const setFilterParamsAC = (params: FilterParamsType) => ({type: 'SET-FILTER-PARAMS', params} as const);
 
 export const fetchCataloguesTC = () => (dispatch: Dispatch<ActionsType>) => {
     api.getCatalogues().then(catalogues => {
@@ -49,12 +62,18 @@ export const fetchCataloguesTC = () => (dispatch: Dispatch<ActionsType>) => {
     )
 }
 export const resetFiltersTC = () => (dispatch: Dispatch<ActionsType>) => {
-    api.getCatalogues().then(catalogues => {
+    const data = {
+        catalogue: 0,
+        payment_from: 0,
+        payment_to: 0,
+    }
+    api.getVacancies(data).then(catalogues => {
             dispatch(resetFilterAC())
+            dispatch(getVacanciesAC(catalogues.data.objects))
+
         }
     )
 }
-
 
 type ActionsType =
     ReturnType<typeof getCataloguesAC>
@@ -62,6 +81,8 @@ type ActionsType =
     | ReturnType<typeof setPaymentFromAC>
     | ReturnType<typeof setPaymentToAC>
     | ReturnType<typeof resetFilterAC>
+    | ReturnType<typeof setFilterParamsAC>
+    | ReturnType<typeof getVacanciesAC>
 export type FilterParamsType = {
     catalogue: number | null
     payment_from: number

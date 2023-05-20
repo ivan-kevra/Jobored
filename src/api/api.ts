@@ -1,5 +1,6 @@
 import axios from "axios";
 import {VacanciesDataResponseType} from "../store/reducers/vacanciesReducer";
+import {FilterParamsType} from "../store/reducers/filterReducer";
 
 
 const API_URL = 'https://startup-summer-2023-proxy.onrender.com/2.0/';
@@ -23,8 +24,9 @@ export const api = {
     auth() {
         return instance.get(`oauth2/password/?login=${AUTH_LOGIN}&password=${AUTH_PWD}&client_id=${CLIENT_ID}&client_secret=${ACCESS_TOKEN}&hr=${CLIENT_HR}`)
     },
-    getVacancies() {
-        return instance.get<VacanciesDataResponseType>(`vacancies`)
+    getVacancies(data: FilterParamsType) {
+        const {payment_from, payment_to, catalogue} = data;
+        return instance.get<VacanciesDataResponseType>(`vacancies/?payment_from=${payment_from}&payment_to=${payment_to}&catalogues=${catalogue}`)
     },
     getCatalogues() {
         return instance.get('catalogues/');
