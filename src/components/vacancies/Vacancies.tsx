@@ -7,12 +7,14 @@ import {SearchInput} from "../searchInput/SearchInput";
 
 type VacanciesPropsType = {
     vacancies: VacancyResponseType[]
+    searchVacancies: (keyword: string) => void
+    keyword: string
 }
-export const Vacancies: React.FC<VacanciesPropsType> = ({vacancies}) => {
+export const Vacancies: React.FC<VacanciesPropsType> = ({vacancies, searchVacancies, keyword}) => {
 
     return (
         <div className={style.vacancies}>
-            <SearchInput/>
+            <SearchInput searchVacancies={searchVacancies} keyword={keyword}/>
             {vacancies.map((vacancy: VacancyResponseType) => (<Vacancy vacancy={vacancy} key={vacancy.id}/>))}
             <Pagination total={3} className={style.pagination}/>
         </div>

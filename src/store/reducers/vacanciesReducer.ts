@@ -9,6 +9,9 @@ const initialState: VacanciesDataResponseType = {
         catalogue: null,
         payment_from: 0,
         payment_to: 0,
+        count: 4,
+        keyword: '',
+        page: 1
     },
 }
 
@@ -24,7 +27,8 @@ export const vacanciesReducer = (state: VacanciesDataResponseType = initialState
                     ...state.filterParams,
                     catalogue: action.params.catalogue,
                     payment_from: action.params.payment_from,
-                    payment_to: action.params.payment_to
+                    payment_to: action.params.payment_to,
+                    keyword: action.params.keyword
                 }
             }
         default:

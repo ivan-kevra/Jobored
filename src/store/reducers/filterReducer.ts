@@ -12,6 +12,9 @@ const initialState: FilterStateType = {
         catalogue: null,
         payment_from: 0,
         payment_to: 0,
+        keyword: '',
+        page: 1,
+        count: 4
     },
     catalogues: []
 }
@@ -67,6 +70,9 @@ export const resetFiltersTC = () => (dispatch: Dispatch<ActionsType>) => {
         catalogue: null,
         payment_from: 0,
         payment_to: 0,
+        keyword: '',
+        page: 1,
+        count: 4
     }
     api.getVacancies(data).then(catalogues => {
             dispatch(resetFilterAC())
@@ -88,6 +94,9 @@ export type FilterParamsType = {
     catalogue: string | null
     payment_from: number
     payment_to: number
+    keyword: string
+    page: number
+    count: number
 }
 export type CatalogueResponseType = {
     title: string

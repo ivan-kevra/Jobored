@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {Grid} from "@mantine/core";
 import {AppRootStateType, useAppDispatch} from "../../store/store";
 import {setVacanciesTC, VacancyResponseType} from "../../store/reducers/vacanciesReducer";
@@ -22,7 +22,10 @@ export const Main = () => {
     const paymentFrom = useSelector<AppRootStateType, number>(state => state.filter.filterParams.payment_from)
     const paymentTo = useSelector<AppRootStateType, number>(state => state.filter.filterParams.payment_to)
     const vacancies = useSelector<AppRootStateType, VacancyResponseType[]>(state => state.vacancies.objects)
+    const keyword = useSelector<AppRootStateType, string>(state => state.vacancies.filterParams.keyword);
 
+
+    const searchVacancies = useCallback((keyword: string) => getVacancies({...filterParams, keyword, page: 1}), []);
 
     const setCatalogue = (title: string | null) => {
         dispatch(setCatalogueAC(title))
@@ -67,7 +70,13 @@ export const Main = () => {
                                        setCatalogue={setCatalogue}
 
             /> </Grid.Col>
-            <Grid.Col span={6}><Vacancies vacancies={vacancies}/></Grid.Col>
+            <Grid.Col span={6}>
+                <Vacancies vacancies={vacancies}
+                           searchVacancies={searchVacancies}
+                           keyword={keyword}
+
+                />
+            </Grid.Col>
         </Grid>
     );
 };

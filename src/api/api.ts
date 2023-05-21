@@ -25,8 +25,8 @@ export const api = {
         return instance.get(`oauth2/password/?login=${AUTH_LOGIN}&password=${AUTH_PWD}&client_id=${CLIENT_ID}&client_secret=${ACCESS_TOKEN}&hr=${CLIENT_HR}`)
     },
     getVacancies(data: FilterParamsType) {
-        const {payment_from, payment_to, catalogue} = data;
-        return instance.get<VacanciesDataResponseType>(`vacancies/?payment_from=${payment_from}&payment_to=${payment_to}&catalogues=${catalogue}`)
+        const {payment_from, payment_to, catalogue, keyword} = data;
+        return instance.get<VacanciesDataResponseType>(`vacancies/?payment_from=${payment_from}&payment_to=${payment_to}&catalogues=${catalogue}&keyword=${keyword}`)
     },
     getCatalogues() {
         return instance.get('catalogues/');
