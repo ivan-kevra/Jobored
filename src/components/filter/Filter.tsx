@@ -81,11 +81,7 @@ export const Filter: React.FC<FilterPropsType> = ({
                     step={10000} min={paymentFrom || 0}
                 />
             </div>
-            <Button radius="lg" size="md" className={style.button}
-                    onClick={setFilter}>
-                Применить
-            </Button>
-
+            <Button radius="lg" size="md" className={style.button} onClick={setFilter}> Применить </Button>
         </div>
     );
 };
