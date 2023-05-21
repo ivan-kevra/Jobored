@@ -28,7 +28,8 @@ export const vacanciesReducer = (state: VacanciesDataResponseType = initialState
                     catalogue: action.params.catalogue,
                     payment_from: action.params.payment_from,
                     payment_to: action.params.payment_to,
-                    keyword: action.params.keyword
+                    keyword: action.params.keyword,
+                    page: action.params.page
                 }
             }
         default:
