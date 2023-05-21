@@ -1,6 +1,6 @@
 import React, {ChangeEvent} from 'react';
 import style from './Style.module.css'
-import {Button, CloseButton, Group, Input, NumberInput, Title} from '@mantine/core';
+import {Button, CloseButton, Group, Input, NumberInput, Select, Title} from '@mantine/core';
 import {IconChevronDown} from '@tabler/icons-react';
 import {
     CatalogueResponseType,
@@ -13,14 +13,15 @@ import {useAppDispatch} from "../../store/store";
 
 type FilterPropsType = {
     catalogues: CatalogueResponseType[]
-    catalogue: number | null
+    catalogue: string | null
     paymentFrom: number
     paymentTo: number
     filterParams: FilterParamsType
     resetFilter: () => void
     getVacancies: (param: FilterParamsType) => void
-    applyFilters: (data: { catalogue: number | null, paymentFrom: number, paymentTo: number }) => void
-    setCatalogue: (title: number) => void
+    applyFilters: (data: { catalogue: string | null, paymentFrom: number, paymentTo: number }) => void
+    setCatalogue: (value: string | null) => void
+
 }
 export const Filter: React.FC<FilterPropsType> = ({
                                                       catalogues,
@@ -33,12 +34,13 @@ export const Filter: React.FC<FilterPropsType> = ({
                                                   }) => {
 
     const dispatch = useAppDispatch()
-
     const setSalaryFrom = (value: number) => dispatch(setPaymentFromAC(value))
     const setSalaryTo = (value: number) => dispatch(setPaymentToAC(value))
     const setFilter = () => {
         applyFilters({catalogue, paymentTo, paymentFrom})
     }
+
+    const catalog = catalogues.map(c => ({'value': String(c.key), 'label': String(c.title)}))
 
     return (
         <div className={style.filter}>
@@ -53,13 +55,13 @@ export const Filter: React.FC<FilterPropsType> = ({
             </div>
             <div className={style.job}>
                 <Title order={3}>Отрасль</Title>
-                <Input component="select"
-                       value={catalogue ? catalogue : ' '}
-                       onChange={(event: ChangeEvent<HTMLSelectElement>) => setCatalogue(+event.currentTarget.value)}
-                       rightSection={<IconChevronDown size={14} stroke={1.5}
-                       />}>
-                    {catalogues.map(catalog => <option key={catalog.key} value={catalog.key}>{catalog.title}</option>)}
-                </Input>
+                <Select
+                    mt="md" withinPortal
+                    data={catalog}
+                    placeholder="Выберите отрасль"
+                    value={catalogue ? catalogue.toString() : null}
+                    onChange={setCatalogue}
+                    rightSection={<IconChevronDown size={14} stroke={1.5}/>}/>
             </div>
             <div className={style.salary}>
                 <Title order={3}>Оклад</Title>
@@ -68,17 +70,16 @@ export const Filter: React.FC<FilterPropsType> = ({
                     placeholder="От"
                     value={paymentFrom}
                     onChange={setSalaryFrom}
-                    step={10000}
+                    step={10000} min={0}
+                    max={paymentTo}
                 />
                 <NumberInput
                     mt="xl"
                     placeholder="До"
                     value={paymentTo}
                     onChange={setSalaryTo}
-                    step={10000}
+                    step={10000} min={paymentFrom || 0}
                 />
-
-
             </div>
             <Button radius="lg" size="md" className={style.button}
                     onClick={setFilter}>

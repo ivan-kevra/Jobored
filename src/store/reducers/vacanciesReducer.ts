@@ -40,6 +40,7 @@ export const setVacanciesTC = (params: FilterParamsType) => (dispatch: Dispatch<
     api.getVacancies(params)
         .then(response => {
             dispatch(getVacanciesAC(response.data.objects))
+            console.log(response.data.objects)
         })
         .catch(() => {
             console.log('error')
@@ -67,3 +68,6 @@ export type VacancyResponseType = {
 }
 export type VacanciesActionsType = ReturnType<typeof getVacanciesAC>
     | ReturnType<typeof setFilterParamsAC>
+
+
+

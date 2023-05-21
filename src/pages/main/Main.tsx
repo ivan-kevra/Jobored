@@ -18,13 +18,13 @@ export const Main = () => {
     const dispatch = useAppDispatch()
     const filterParams = useSelector<AppRootStateType, FilterParamsType>(state => state.filter.filterParams)
     const catalogues = useSelector<AppRootStateType, CatalogueResponseType[]>(state => state.filter.catalogues)
-    const catalogue = useSelector<AppRootStateType, number | null>(state => state.filter.filterParams.catalogue)
+    const catalogue = useSelector<AppRootStateType, string | null>(state => state.filter.filterParams.catalogue)
     const paymentFrom = useSelector<AppRootStateType, number>(state => state.filter.filterParams.payment_from)
     const paymentTo = useSelector<AppRootStateType, number>(state => state.filter.filterParams.payment_to)
     const vacancies = useSelector<AppRootStateType, VacancyResponseType[]>(state => state.vacancies.objects)
 
 
-    const setCatalogue = (title: number) => {
+    const setCatalogue = (title: string | null) => {
         dispatch(setCatalogueAC(title))
     }
     const resetFilter = () => {
@@ -36,7 +36,7 @@ export const Main = () => {
             ? dispatch(setVacanciesTC(filterParams))
             : dispatch(setVacanciesTC(param));
     }
-    const applyFilters = (data: { catalogue: number | null, paymentFrom: number, paymentTo: number }) => {
+    const applyFilters = (data: { catalogue: string | null, paymentFrom: number, paymentTo: number }) => {
         const param = {
             ...filterParams,
             catalogues: data.catalogue,
