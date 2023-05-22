@@ -1,7 +1,8 @@
 import React from 'react';
 import style from './Style.module.css'
 import logo from '../../assets/img/logo.svg'
-import {Button, Grid, Image, Title} from "@mantine/core";
+import {Grid, Image, Title} from "@mantine/core";
+import {NavLink} from 'react-router-dom';
 
 
 export const Header = () => {
@@ -12,12 +13,8 @@ export const Header = () => {
                 <Title order={1}>Jobored</Title>
             </Grid.Col>
             <Grid.Col span={8} bg='blue' className={style.menu}>
-                <Button variant="subtle" size="16px">
-                    Поиск вакансий
-                </Button>
-                <Button variant="subtle" color="dark" size="16px">
-                    Избранное
-                </Button>
+                <NavLink to={'/main'} className={style.nav}>Поиск вакансий</NavLink>
+                <NavLink to={'/favorites'} className={style.nav}>Избранное</NavLink>
             </Grid.Col>
         </Grid>
     );

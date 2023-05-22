@@ -3,20 +3,24 @@ import style from './Style.module.css'
 import {Vacancy} from "../../components/vacancies/vacancy/Vacancy";
 import {Pagination} from "@mantine/core";
 import {Header} from "../../components/header/Header";
+import {AppRootStateType} from "../../store/store";
+import {useSelector} from "react-redux";
+import {VacancyResponseType} from "../../store/reducers/vacanciesReducer";
 
 export const Favorites = () => {
+    const favoritesVacancies = useSelector<AppRootStateType, VacancyResponseType[]>(state => state.favorites.favoriteVacancies);
+    const page = useSelector<AppRootStateType, number>(state => state.favorites.page);
     return (
         <>
             <Header/>
             <div className={style.vacancies}>
-                {/*<Vacancy/>*/}
-                {/*<Vacancy/>*/}
-                {/*<Vacancy/>*/}
-                {/*<Vacancy/>*/}
-
-                <Pagination total={3} className={style.pagination}/>
+                {favoritesVacancies.map((vacancy) => {
+                    return (
+                        <Vacancy vacancy={vacancy}/>
+                    )
+                })}
+                <Pagination total={3} className={style.pagination} value={page}/>
             </div>
-
         </>
 
     );

@@ -1,10 +1,10 @@
 import React from 'react';
 import {Header} from "../../components/header/Header";
-import {Vacancy} from "../../components/vacancies/vacancy/Vacancy";
 import style from './Style.module.css'
 import {List, Title} from "@mantine/core";
 
 export const FullVacancy = () => {
+
     return (
         <div>
             <Header/>

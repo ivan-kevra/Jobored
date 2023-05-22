@@ -61,7 +61,6 @@ export const setFilterParamsAC = (params: FilterParamsType) => ({type: 'SET-FILT
 export const fetchCataloguesTC = () => (dispatch: Dispatch<ActionsType>) => {
     api.getCatalogues().then(catalogues => {
             dispatch(getCataloguesAC(catalogues.data))
-            console.log(catalogues.data)
         }
     )
 }
