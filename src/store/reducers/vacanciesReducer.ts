@@ -69,6 +69,7 @@ export type VacancyResponseType = {
     payment_to: number
     payment_from: number
     currency: string
+    vacancyRichText: string
 }
 export type VacanciesActionsType = ReturnType<typeof getVacanciesAC>
     | ReturnType<typeof setFilterParamsAC>

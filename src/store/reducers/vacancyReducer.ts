@@ -16,7 +16,8 @@ const initialState: VacancyInitialStateType = {
         currency: '',
         profession: '',
         firm_name: '',
-        id: 0
+        id: 0,
+        vacancyRichText: ''
     }
 }
 export const vacancyReducer = (state: VacancyInitialStateType = initialState, action: VacancyActionsType) => {
