@@ -11,7 +11,7 @@ import {useSelector} from "react-redux";
 export const FullVacancy = () => {
     const vacancy = useSelector<AppRootStateType, VacancyResponseType>(state => state.vacancy.currentVacancy);
     return (
-        <div>
+        <div data-elem={`vacancy-${vacancy.id}`}>
             <Header/>
             <div className={style.vacancy}>
                 <Vacancy vacancy={vacancy}/>
@@ -20,7 +20,6 @@ export const FullVacancy = () => {
                 <Title order={4} color={'#000000'}>Обязанности:</Title>
                 <Text dangerouslySetInnerHTML={{__html: vacancy.vacancyRichText}} className={style.text}/>
             </div>
-            s
         </div>
     );
 };

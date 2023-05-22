@@ -56,6 +56,7 @@ export const Filter: React.FC<FilterPropsType> = ({
             <div className={style.job}>
                 <Title order={3}>Отрасль</Title>
                 <Select
+                    data-elem='industry-select'
                     mt="md" withinPortal
                     data={catalog}
                     placeholder="Выберите отрасль"
@@ -66,6 +67,7 @@ export const Filter: React.FC<FilterPropsType> = ({
             <div className={style.salary}>
                 <Title order={3}>Оклад</Title>
                 <NumberInput
+                    data-elem='salary-from-input'
                     mt="xl"
                     placeholder="От"
                     value={paymentFrom}
@@ -74,6 +76,7 @@ export const Filter: React.FC<FilterPropsType> = ({
                     max={paymentTo}
                 />
                 <NumberInput
+                    data-elem='salary-to-input'
                     mt="xl"
                     placeholder="До"
                     value={paymentTo}
@@ -81,7 +84,8 @@ export const Filter: React.FC<FilterPropsType> = ({
                     step={10000} min={paymentFrom || 0}
                 />
             </div>
-            <Button radius="lg" size="md" className={style.button} onClick={setFilter}> Применить </Button>
+            <Button data-elem="search-button" radius="lg" size="md" className={style.button}
+                    onClick={setFilter}> Применить </Button>
         </div>
     );
 };

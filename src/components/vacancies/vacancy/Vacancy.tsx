@@ -38,8 +38,10 @@ export const Vacancy: React.FC<VacancyPropsType> = ({vacancy}) => {
                     <Title order={4} color={'#5E96FC'} onClick={getVacancyHandler}>{vacancy.profession}</Title>
                 </NavLink>
                 {value
-                    ? <img src={favoriteStar} alt={'star'} onClick={removeFromFavorites}/>
-                    : <img src={star} alt={'star'} onClick={addToFavorites}/>}
+                    ? <img src={favoriteStar} alt={'star'} onClick={removeFromFavorites}
+                           data-elem={`vacancy-${vacancy.id}_-shortlist-button`}/>
+                    : <img src={star} alt={'star'} onClick={addToFavorites}
+                           data-elem={`vacancy-${vacancy.id}_-shortlist-button`}/>}
             </div>
             <div className={style.salary}>
                 {(vacancy.payment_from !== 0 && vacancy.payment_from !== 0) &&

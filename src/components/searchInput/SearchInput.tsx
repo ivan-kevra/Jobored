@@ -16,10 +16,11 @@ export const SearchInput: React.FC<SearchInputPropsType> = ({searchVacancies, ke
     }
     return (
         <Input.Wrapper id="search" className={style.search}>
-            <Input id="search" placeholder="Введите название вакансии" className={style.input}
+            <Input data-elem="search-input"
+                   id="search" placeholder="Введите название вакансии" className={style.input}
                    value={searchValue}
                    onChange={changeHandler}/>
-            <Button radius="md" size="sm" className={style.button} onClick={searchVacanciesHandler}>
+            <Button data-elem="search-button" radius="md" size="sm" className={style.button} onClick={searchVacanciesHandler}>
                 Поиск
             </Button>
         </Input.Wrapper>
