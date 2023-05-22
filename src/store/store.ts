@@ -5,12 +5,14 @@ import {AnyAction, applyMiddleware, combineReducers, legacy_createStore} from "r
 import {vacanciesReducer} from "./reducers/vacanciesReducer";
 import {filterReducer} from "./reducers/filterReducer";
 import {favoriteReducer} from "./reducers/favoriteReducer";
+import {vacancyReducer} from "./reducers/vacancyReducer";
 
 const rootReducer = combineReducers({
     app: appReducer,
     vacancies: vacanciesReducer,
     filter: filterReducer,
-    favorites: favoriteReducer
+    favorites: favoriteReducer,
+    vacancy: vacancyReducer
 });
 
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunkMiddleWare))

@@ -31,5 +31,8 @@ export const api = {
     getCatalogues() {
         return instance.get('catalogues/');
     },
+    getVacancyById(id: number) {
+        return instance.get(`vacancies/${id}`);
+    }
 }
 

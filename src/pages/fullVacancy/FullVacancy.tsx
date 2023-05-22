@@ -2,14 +2,19 @@ import React from 'react';
 import {Header} from "../../components/header/Header";
 import style from './Style.module.css'
 import {List, Title} from "@mantine/core";
+import {AppRootStateType, useAppDispatch} from "../../store/store";
+import {Vacancy} from "../../components/vacancies/vacancy/Vacancy";
+import {VacancyResponseType} from "../../store/reducers/vacanciesReducer";
+import {useSelector} from "react-redux";
+
 
 export const FullVacancy = () => {
-
+    const vacancy = useSelector<AppRootStateType, VacancyResponseType>(state => state.vacancy.currentVacancy);
     return (
         <div>
             <Header/>
             <div className={style.vacancy}>
-                {/*<Vacancy address={'address'}/>*/}
+                <Vacancy vacancy={vacancy}/>
             </div>
             <div className={style.vacancy}>
                 <Title order={4} color={'#000000'}>Обязанности:</Title>
@@ -18,7 +23,7 @@ export const FullVacancy = () => {
                         продукци</List.Item>
                     <List.Item>Подготовка и верстка макетов в CorelDraw, Adobe Photoshop</List.Item>
                     <List.Item>Создание дизайна логототипов и брендбуков</List.Item>
-                    <List.Item>Управленческая функция: обучение, адаптация дизайнеров, их контроль, оценкаы</List.Item>
+                    <List.Item>Управленческая функция: обучение, адаптация дизайнеров, их контроль, оцеsнкаы</List.Item>
                 </List>
             </div>
             <div className={style.vacancy}>

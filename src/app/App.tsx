@@ -22,7 +22,7 @@ function App() {
 
             <Routes>
                 <Route element={<Main/>} path='/main'/>
-                <Route element={<FullVacancy/>} path='/fullVacancy'/>
+                <Route element={<FullVacancy />} path='/fullVacancy'/>
                 <Route element={<Favorites/>} path='/favorites'/>
                 <Route element={<Empty/>} path='/empty'/>
                 <Route element={<Navigate to={'/main'}/>} path={'*'}/>

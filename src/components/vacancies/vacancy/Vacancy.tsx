@@ -9,6 +9,8 @@ import {AppRootStateType, useAppDispatch} from "../../../store/store";
 import {addToFavoriteAC, removeFromFavoriteAC} from "../../../store/reducers/favoriteReducer";
 import favoriteStar from '../../../assets/img/star.svg'
 import star from '../../../assets/img/star2.svg'
+import {NavLink} from "react-router-dom";
+import {setCurrentVacancyTC} from "../../../store/reducers/vacancyReducer";
 
 type VacancyPropsType = {
     vacancy: VacancyResponseType
@@ -17,25 +19,29 @@ export const Vacancy: React.FC<VacancyPropsType> = ({vacancy}) => {
     const dispatch = useAppDispatch();
     const favoritesVacancies = useSelector<AppRootStateType, VacancyResponseType[]>(state => state.favorites.favoriteVacancies);
     const value = favoritesVacancies.find(v => v.id === vacancy.id);
+
     const addToFavorites = () => {
         dispatch(addToFavoriteAC(vacancy))
-        console.log(favoritesVacancies)
     }
     const removeFromFavorites = () => {
         dispatch(removeFromFavoriteAC(vacancy.id))
-        console.log(favoritesVacancies)
     }
 
+    const getVacancyHandler = () => {
+        dispatch(setCurrentVacancyTC(vacancy.id))
+    }
 
     return (
         <div className={style.vacancy}>
             <div className={style.title}>
-                <Title order={4} color={'#5E96FC'}>{vacancy.profession}</Title>
+                <NavLink to='/fullVacancy'>
+                    <Title order={4} color={'#5E96FC'} onClick={getVacancyHandler}>{vacancy.profession}</Title>
+                </NavLink>
                 {value
                     ? <img src={favoriteStar} alt={'star'} onClick={removeFromFavorites}/>
                     : <img src={star} alt={'star'} onClick={addToFavorites}/>}
             </div>
-            <div className={style.salary}>s
+            <div className={style.salary}>
                 {(vacancy.payment_from !== 0 && vacancy.payment_from !== 0) &&
                     <Text fw={700}>з/п
                         {vacancy.payment_from !== 0 && ' от ' + vacancy.payment_from}
