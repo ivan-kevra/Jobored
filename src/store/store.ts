@@ -15,6 +15,7 @@ const rootReducer = combineReducers({
     vacancy: vacancyReducer
 });
 
+
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunkMiddleWare))
 
 export type AppDispatchType = ThunkDispatch<AppRootStateType, any, AnyAction>

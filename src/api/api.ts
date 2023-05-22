@@ -33,6 +33,11 @@ export const api = {
     },
     getVacancyById(id: number) {
         return instance.get(`vacancies/${id}`);
+    },
+    getVacanciesById: (ids: number[]): Promise<ResponseType> => {
+        const idsQuery = ids.join('&ids[]=')
+        return instance.get(`vacancies/?ids=${idsQuery}`)
+            .then(response => response.data)
     }
 }
 

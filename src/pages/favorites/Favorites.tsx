@@ -10,15 +10,12 @@ import {VacancyResponseType} from "../../store/reducers/vacanciesReducer";
 export const Favorites = () => {
     const favoritesVacancies = useSelector<AppRootStateType, VacancyResponseType[]>(state => state.favorites.favoriteVacancies);
     const page = useSelector<AppRootStateType, number>(state => state.favorites.page);
+
     return (
-        <>
+        <>s
             <Header/>
             <div className={style.vacancies}>
-                {favoritesVacancies.map((vacancy) => {
-                    return (
-                        <Vacancy vacancy={vacancy}/>
-                    )
-                })}
+                {favoritesVacancies.map((vacancy) => <Vacancy vacancy={vacancy} key={vacancy.id}/>)}
                 <Pagination total={3} className={style.pagination} value={page}/>
             </div>
         </>

@@ -1,4 +1,4 @@
-import {VacanciesActionsType, VacancyResponseType} from "./vacanciesReducer";
+import {VacancyResponseType} from "./vacanciesReducer";
 import {Dispatch} from "redux";
 import {AppRootStateType} from "../store";
 import {api} from "../../api/api";
