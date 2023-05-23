@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 import style from './Style.module.css'
 import {Loader, Pagination} from "@mantine/core";
 import {Vacancy} from "./vacancy/Vacancy";
-import {vacanciesLoadingStatusAC, VacancyResponseType} from "../../store/reducers/vacanciesReducer";
+import {VacancyResponseType} from "../../store/reducers/vacanciesReducer";
 import {SearchInput} from "../searchInput/SearchInput";
 
 type VacanciesPropsType = {
@@ -26,7 +26,7 @@ export const Vacancies: React.FC<VacanciesPropsType> = ({
             {vacanciesLoadingStatus
                 ? vacancies.map((vacancy: VacancyResponseType) => (
                     <Vacancy vacancy={vacancy} key={vacancy.id}/>))
-                : <Loader/>}
+                : <Loader className={style.loader}/>}
             <Pagination total={3} className={style.pagination} onChange={setVacanciesPage}/>
         </div>
     );

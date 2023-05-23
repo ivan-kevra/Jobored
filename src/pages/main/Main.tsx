@@ -1,7 +1,7 @@
-import React, {useCallback, useEffect, useState} from 'react';
-import {Grid, Loader} from "@mantine/core";
+import React, {useCallback, useEffect} from 'react';
+import {Grid} from "@mantine/core";
 import {AppRootStateType, useAppDispatch} from "../../store/store";
-import {setVacanciesTC, vacanciesLoadingStatusAC, VacancyResponseType} from "../../store/reducers/vacanciesReducer";
+import {setVacanciesTC, VacancyResponseType} from "../../store/reducers/vacanciesReducer";
 import {Vacancies} from "../../components/vacancies/Vacancies";
 import {
     CatalogueResponseType,
@@ -12,9 +12,10 @@ import {
 import {Header} from "../../components/header/Header";
 import {useSelector} from "react-redux";
 import {Filter} from "../../components/filter/Filter";
+import {Empty} from "../empty/Empty";
+import style from './Style.module.css'
 
 export const Main = () => {
-
     const dispatch = useAppDispatch()
     const filterParams = useSelector<AppRootStateType, FilterParamsType>(state => state.filter.filterParams)
     const catalogues = useSelector<AppRootStateType, CatalogueResponseType[]>(state => state.filter.catalogues)
@@ -28,10 +29,7 @@ export const Main = () => {
 
     const searchVacancies = useCallback((keyword: string) => getVacancies({...filterParams, keyword, page: 1}), []);
     const setVacanciesPage = useCallback((page: number) => getVacancies({...filterParams, page}), [page]);
-
-    const setCatalogue = (title: string | null) => {
-        dispatch(setCatalogueAC(title))
-    }
+    const setCatalogue = (title: string | null) => dispatch(setCatalogueAC(title))
     const resetFilter = () => {
         dispatch(setVacanciesTC(filterParams))
         dispatch(resetFiltersTC())
@@ -51,19 +49,16 @@ export const Main = () => {
         }
         getVacancies(param)
     }
-
-
     useEffect(() => {
         dispatch(setVacanciesTC(filterParams))
         dispatch(fetchCataloguesTC())
     }, []);
 
 
-    return (
-        <Grid justify="center">
-
+    return vacancies.length === 0 ? <Empty/>
+        : <Grid justify="center">
             <Grid.Col span={12}><Header/></Grid.Col>
-            <Grid.Col span={3}>
+            <Grid.Col span={3} className={style.block}>
                 <Filter catalogues={catalogues}
                         catalogue={catalogue}
                         paymentFrom={paymentFrom}
@@ -73,18 +68,15 @@ export const Main = () => {
                         getVacancies={getVacancies}
                         applyFilters={applyFilters}
                         setCatalogue={setCatalogue}
-
-                /> </Grid.Col>
+                />
+            </Grid.Col>
             <Grid.Col span={6}>
                 <Vacancies vacancies={vacancies}
                            searchVacancies={searchVacancies}
                            keyword={keyword}
                            setVacanciesPage={setVacanciesPage}
-                           vacanciesLoadingStatus={vacanciesLoadingStatus}
-                />
-
+                           vacanciesLoadingStatus={vacanciesLoadingStatus}/>
             </Grid.Col>
         </Grid>
-    );
 };
 

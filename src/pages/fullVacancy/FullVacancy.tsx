@@ -2,7 +2,7 @@ import React from 'react';
 import {Header} from "../../components/header/Header";
 import style from './Style.module.css'
 import {Text, Title} from "@mantine/core";
-import {AppRootStateType, useAppDispatch} from "../../store/store";
+import {AppRootStateType} from "../../store/store";
 import {Vacancy} from "../../components/vacancies/vacancy/Vacancy";
 import {VacancyResponseType} from "../../store/reducers/vacanciesReducer";
 import {useSelector} from "react-redux";

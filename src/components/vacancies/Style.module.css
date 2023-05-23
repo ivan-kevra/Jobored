@@ -22,3 +22,9 @@
     display: flex;
     justify-content: center;
 }
+
+.loader {
+    display: flex;
+    margin: 0 auto;
+    height: 70vh;
+}

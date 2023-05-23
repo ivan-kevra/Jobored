@@ -1,11 +1,10 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import style from './Style.module.css'
-import {Button, CloseButton, Group, Input, NumberInput, Select, Title} from '@mantine/core';
+import {Button, CloseButton, Group, NumberInput, Select, Title} from '@mantine/core';
 import {IconChevronDown} from '@tabler/icons-react';
 import {
     CatalogueResponseType,
     FilterParamsType,
-    setCatalogueAC,
     setPaymentFromAC,
     setPaymentToAC
 } from "../../store/reducers/filterReducer";
@@ -36,9 +35,7 @@ export const Filter: React.FC<FilterPropsType> = ({
     const dispatch = useAppDispatch()
     const setSalaryFrom = (value: number) => dispatch(setPaymentFromAC(value))
     const setSalaryTo = (value: number) => dispatch(setPaymentToAC(value))
-    const setFilter = () => {
-        applyFilters({catalogue, paymentTo, paymentFrom})
-    }
+    const setFilter = () => applyFilters({catalogue, paymentTo, paymentFrom})
 
     const catalog = catalogues.map(c => ({'value': String(c.key), 'label': String(c.title)}))
 
@@ -85,7 +82,7 @@ export const Filter: React.FC<FilterPropsType> = ({
                 />
             </div>
             <Button data-elem="search-button" radius="lg" size="md" className={style.button}
-                    onClick={setFilter}> Применить </Button>
+                    onClick={setFilter}>Применить</Button>
         </div>
     );
 };

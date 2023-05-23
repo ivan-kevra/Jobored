@@ -36,16 +36,14 @@ export const setCurrentVacancyTC = (id: number) => (dispatch: Dispatch<VacancyAc
     if (!vacancy) {
         api.getVacancyById(id)
             .then(response => {
-                    dispatch(addCurrentVacancyAC(response.data[0]))
-                console.log('1')
+                dispatch(addCurrentVacancyAC(response.data[0]))
             })
     } else {
         dispatch(addCurrentVacancyAC(vacancy))
-        console.log('2')
     }
 }
 
-
+//types
 type VacancyInitialStateType = {
     currentVacancy: VacancyResponseType
 }

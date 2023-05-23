@@ -19,17 +19,9 @@ export const Vacancy: React.FC<VacancyPropsType> = ({vacancy}) => {
     const dispatch = useAppDispatch();
     const favoritesVacancies = useSelector<AppRootStateType, VacancyResponseType[]>(state => state.favorites.favoriteVacancies);
     const value = favoritesVacancies.find(v => v.id === vacancy.id);
-
-    const addToFavorites = () => {
-        dispatch(addToFavoriteAC(vacancy))
-    }
-    const removeFromFavorites = () => {
-        dispatch(removeFromFavoriteAC(vacancy.id))
-    }
-
-    const getVacancyHandler = () => {
-        dispatch(setCurrentVacancyTC(vacancy.id))
-    }
+    const addToFavorites = () => dispatch(addToFavoriteAC(vacancy))
+    const removeFromFavorites = () => dispatch(removeFromFavoriteAC(vacancy.id))
+    const getVacancyHandler = () => dispatch(setCurrentVacancyTC(vacancy.id))
 
     return (
         <div className={style.vacancy}>

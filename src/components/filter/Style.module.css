@@ -1,12 +1,10 @@
-.filter {
-    background: #FFFFFF;
 
-}
 
 .header {
     display: flex;
     justify-content: space-between;
     padding: 20px;
+    flex-wrap: wrap;
 }
 
 .job {
