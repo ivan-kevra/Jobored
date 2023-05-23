@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect} from 'react';
-import {Grid} from "@mantine/core";
+import {Grid, Loader} from "@mantine/core";
 import {AppRootStateType, useAppDispatch} from "../../store/store";
 import {setVacanciesTC, VacancyResponseType} from "../../store/reducers/vacanciesReducer";
 import {Vacancies} from "../../components/vacancies/Vacancies";
@@ -58,6 +58,7 @@ export const Main = () => {
 
     return (
         <Grid justify="center">
+            {/*<Loader/>*/}
             <Grid.Col span={12}><Header/></Grid.Col>
             <Grid.Col span={3}><Filter catalogues={catalogues}
                                        catalogue={catalogue}

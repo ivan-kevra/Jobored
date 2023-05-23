@@ -1,10 +1,6 @@
-.header {
-    /*background: #FFFFFF;*/
-}
 
 .logo {
     display: flex;
-    /*background-color: #eaa0a0;*/
     justify-content: center;
     gap: 10px;
     padding: 24px;
@@ -12,10 +8,16 @@
 
 .menu {
     background: #FFFFFF;
-    /*background-color: #8282e7*/
     display: flex;
     gap: 20px
 }
+
 .nav {
     text-decoration: none;
+    color: #232134
+}
+
+.text {
+    text-decoration: none;
+    color: #5E96FC
 }

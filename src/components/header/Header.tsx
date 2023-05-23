@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import style from './Style.module.css'
 import logo from '../../assets/img/logo.svg'
 import {Grid, Image, Title} from "@mantine/core";
@@ -13,10 +13,13 @@ export const Header = () => {
                 <Title order={1}>Jobored</Title>
             </Grid.Col>
             <Grid.Col span={8} bg='blue' className={style.menu}>
-                <NavLink to={'/main'} className={style.nav}>Поиск вакансий</NavLink>
-                <NavLink to={'/favorites'} className={style.nav}>Избранное</NavLink>
+                <NavLink to={'/main'} className={({isActive}) => isActive ? style.text : style.nav}>
+                    Поиск вакансий</NavLink>
+                <NavLink to={'/favorites'} className={({isActive}) => isActive ? style.text : style.nav}>
+                    Избранное</NavLink>
             </Grid.Col>
         </Grid>
     );
 };
+
 
