@@ -13,6 +13,7 @@ const initialState: VacanciesDataResponseType = {
         keyword: '',
         page: 1
     },
+    vacanciesLoadingStatus: true
 }
 
 export const vacanciesReducer = (state: VacanciesDataResponseType = initialState, action: VacanciesActionsType): VacanciesDataResponseType => {
@@ -37,6 +38,10 @@ export const vacanciesReducer = (state: VacanciesDataResponseType = initialState
                 ...state, objects: state.objects
                     .map(e => e.id === action.payload.id ? {...e, favorite: action.payload.isFavorite} : e)
             }
+        case "VACANCIES-LOADING-STATUS":
+            return {
+                ...state, vacanciesLoadingStatus: action.status
+            }
         default:
             return state
     }
@@ -48,12 +53,15 @@ export const toggleFavoriteJobAC = (id: number, isFavorite: boolean) => ({
     type: 'TOGGLE-FAVORITE',
     payload: {id, isFavorite}
 } as const)
+export const vacanciesLoadingStatusAC = (status: boolean) => ({type: 'VACANCIES-LOADING-STATUS', status} as const);
 //thunks
 
 export const setVacanciesTC = (params: FilterParamsType) => (dispatch: Dispatch<VacanciesActionsType>) => {
+    dispatch(vacanciesLoadingStatusAC(false))
     api.getVacancies(params)
         .then(response => {
             dispatch(getVacanciesAC(response.data.objects))
+            dispatch(vacanciesLoadingStatusAC(true))
         })
         .catch(() => {
             console.log('error')
@@ -64,6 +72,7 @@ export const setVacanciesTC = (params: FilterParamsType) => (dispatch: Dispatch<
 export type VacanciesDataResponseType = {
     objects: VacancyResponseType[],
     filterParams: FilterParamsType,
+    vacanciesLoadingStatus: boolean
 }
 export type VacancyResponseType = {
     id: number
@@ -83,6 +92,7 @@ export type VacancyResponseType = {
 export type VacanciesActionsType = ReturnType<typeof getVacanciesAC>
     | ReturnType<typeof setFilterParamsAC>
     | ReturnType<typeof toggleFavoriteJobAC>
+    | ReturnType<typeof vacanciesLoadingStatusAC>
 
 
 

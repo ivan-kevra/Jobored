@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {Grid, Loader} from "@mantine/core";
 import {AppRootStateType, useAppDispatch} from "../../store/store";
-import {setVacanciesTC, VacancyResponseType} from "../../store/reducers/vacanciesReducer";
+import {setVacanciesTC, vacanciesLoadingStatusAC, VacancyResponseType} from "../../store/reducers/vacanciesReducer";
 import {Vacancies} from "../../components/vacancies/Vacancies";
 import {
     CatalogueResponseType,
@@ -24,6 +24,7 @@ export const Main = () => {
     const vacancies = useSelector<AppRootStateType, VacancyResponseType[]>(state => state.vacancies.objects)
     const keyword = useSelector<AppRootStateType, string>(state => state.vacancies.filterParams.keyword);
     const page = useSelector<AppRootStateType, number>(state => state.vacancies.filterParams.page);
+    const vacanciesLoadingStatus = useSelector<AppRootStateType, boolean>(state => state.vacancies.vacanciesLoadingStatus);
 
     const searchVacancies = useCallback((keyword: string) => getVacancies({...filterParams, keyword, page: 1}), []);
     const setVacanciesPage = useCallback((page: number) => getVacancies({...filterParams, page}), [page]);
@@ -60,27 +61,28 @@ export const Main = () => {
 
     return (
         <Grid justify="center">
-            {/*<Loader/>*/}
-            <Grid.Col span={12}><Header/></Grid.Col>
-            <Grid.Col span={3}><Filter catalogues={catalogues}
-                                       catalogue={catalogue}
-                                       paymentFrom={paymentFrom}
-                                       paymentTo={paymentTo}
-                                       filterParams={filterParams}
-                                       resetFilter={resetFilter}
-                                       getVacancies={getVacancies}
-                                       applyFilters={applyFilters}
-                                       setCatalogue={setCatalogue}
 
-            /> </Grid.Col>
+            <Grid.Col span={12}><Header/></Grid.Col>
+            <Grid.Col span={3}>
+                <Filter catalogues={catalogues}
+                        catalogue={catalogue}
+                        paymentFrom={paymentFrom}
+                        paymentTo={paymentTo}
+                        filterParams={filterParams}
+                        resetFilter={resetFilter}
+                        getVacancies={getVacancies}
+                        applyFilters={applyFilters}
+                        setCatalogue={setCatalogue}
+
+                /> </Grid.Col>
             <Grid.Col span={6}>
                 <Vacancies vacancies={vacancies}
                            searchVacancies={searchVacancies}
                            keyword={keyword}
                            setVacanciesPage={setVacanciesPage}
-                           page={page}
-
+                           vacanciesLoadingStatus={vacanciesLoadingStatus}
                 />
+
             </Grid.Col>
         </Grid>
     );

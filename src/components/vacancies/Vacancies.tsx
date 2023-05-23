@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import style from './Style.module.css'
-import {Pagination} from "@mantine/core";
+import {Loader, Pagination} from "@mantine/core";
 import {Vacancy} from "./vacancy/Vacancy";
-import {VacancyResponseType} from "../../store/reducers/vacanciesReducer";
+import {vacanciesLoadingStatusAC, VacancyResponseType} from "../../store/reducers/vacanciesReducer";
 import {SearchInput} from "../searchInput/SearchInput";
 
 type VacanciesPropsType = {
@@ -10,20 +10,23 @@ type VacanciesPropsType = {
     searchVacancies: (keyword: string) => void
     keyword: string
     setVacanciesPage: (page: number) => void
-    page: number
+    vacanciesLoadingStatus: boolean
 }
 export const Vacancies: React.FC<VacanciesPropsType> = ({
                                                             vacancies,
                                                             searchVacancies,
                                                             keyword,
                                                             setVacanciesPage,
-                                                            page
+                                                            vacanciesLoadingStatus
                                                         }) => {
 
     return (
         <div className={style.vacancies}>
             <SearchInput searchVacancies={searchVacancies} keyword={keyword}/>
-            {vacancies.map((vacancy: VacancyResponseType) => (<Vacancy vacancy={vacancy} key={vacancy.id}/>))}
+            {vacanciesLoadingStatus
+                ? vacancies.map((vacancy: VacancyResponseType) => (
+                    <Vacancy vacancy={vacancy} key={vacancy.id}/>))
+                : <Loader/>}
             <Pagination total={3} className={style.pagination} onChange={setVacanciesPage}/>
         </div>
     );
