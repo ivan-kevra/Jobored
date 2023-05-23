@@ -36,11 +36,12 @@ export const Vacancy: React.FC<VacancyPropsType> = ({vacancy}) => {
                            data-elem={`vacancy-${vacancy.id}_-shortlist-button`}/>}
             </div>
             <div className={style.salary}>
-                {(vacancy.payment_from !== 0 && vacancy.payment_from !== 0) &&
+                {(vacancy.payment_from !== 0 && vacancy.payment_from !== 0) ?
                     <Text fw={700}>з/п
                         {vacancy.payment_from !== 0 && ' от ' + vacancy.payment_from}
                         {vacancy.payment_to !== 0 && ' до ' + vacancy.payment_to}
-                        {vacancy.currency}</Text>}
+                        {vacancy.currency}</Text>
+                    : <Text fw={700}>з/п не указана</Text>}
 
                 <img src={point} alt='point'/>
                 <Text>{vacancy.type_of_work.title}</Text>

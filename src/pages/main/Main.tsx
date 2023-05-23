@@ -55,7 +55,7 @@ export const Main = () => {
     }, []);
 
 
-    return vacancies.length === 0 ? <Empty/>
+    return !vacancies ? <Empty/>
         : <Grid justify="center">
             <Grid.Col span={12}><Header/></Grid.Col>
             <Grid.Col span={3} className={style.block}>
