@@ -20,12 +20,11 @@ export const Vacancies: React.FC<VacanciesPropsType> = ({
                                                             page
                                                         }) => {
 
-
     return (
         <div className={style.vacancies}>
             <SearchInput searchVacancies={searchVacancies} keyword={keyword}/>
             {vacancies.map((vacancy: VacancyResponseType) => (<Vacancy vacancy={vacancy} key={vacancy.id}/>))}
-            <Pagination total={3} className={style.pagination} value={page} onChange={setVacanciesPage}/>
+            <Pagination total={3} className={style.pagination} onChange={setVacanciesPage}/>
         </div>
     );
 };

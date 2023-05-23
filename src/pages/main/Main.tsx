@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {Grid, Loader} from "@mantine/core";
 import {AppRootStateType, useAppDispatch} from "../../store/store";
 import {setVacanciesTC, VacancyResponseType} from "../../store/reducers/vacanciesReducer";
@@ -27,6 +27,7 @@ export const Main = () => {
 
     const searchVacancies = useCallback((keyword: string) => getVacancies({...filterParams, keyword, page: 1}), []);
     const setVacanciesPage = useCallback((page: number) => getVacancies({...filterParams, page}), [page]);
+
     const setCatalogue = (title: string | null) => {
         dispatch(setCatalogueAC(title))
     }
@@ -49,6 +50,7 @@ export const Main = () => {
         }
         getVacancies(param)
     }
+
 
     useEffect(() => {
         dispatch(setVacanciesTC(filterParams))
